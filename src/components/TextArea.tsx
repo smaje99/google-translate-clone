@@ -10,7 +10,12 @@ type Props = {
   value: string;
 };
 
-const commonStyles = { height: '200px', border: 0, resize: undefined };
+const commonStyles: React.CSSProperties = {
+  height: '200px',
+  border: 0,
+  resize: 'none',
+  // formSizing: 'content',
+};
 
 function getPlaceholder(type: SectionType, loading: boolean) {
   if (type === SectionType.From) {
@@ -42,6 +47,7 @@ export const TextArea: React.FC<Props> = ({ type, loading = false, onChange, val
       placeholder={getPlaceholder(type, loading)}
       autoFocus={type === SectionType.From}
       style={styles}
+      disabled={type === SectionType.To}
     />
   );
 };
