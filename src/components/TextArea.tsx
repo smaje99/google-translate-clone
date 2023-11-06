@@ -21,7 +21,7 @@ function getPlaceholder(type: SectionType, loading: boolean) {
     return 'Traduciendo...';
   }
 
-  return 'Traducir';
+  return 'Traducción';
 }
 
 export const TextArea: React.FC<Props> = ({ type, loading = false, onChange, value }) => {
