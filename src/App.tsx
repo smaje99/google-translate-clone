@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Container, Row, Col, Button, Stack } from 'react-bootstrap';
 
 import { AUTO_LANGUAGE } from './constants';
@@ -9,6 +10,7 @@ import { SectionType } from './types.d';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import { translate } from './services/translate';
 
 function App() {
   const {
@@ -23,6 +25,25 @@ function App() {
     setFromText,
     setResult,
   } = useStore();
+
+  useEffect(() => {
+    if (fromText.length === 0) {
+      return;
+    }
+
+    translate({ fromLanguage, toLanguage, text: fromText })
+      .then((result) => {
+        if (result == null) {
+          return;
+        }
+
+        setResult(result);
+      })
+      .catch((error) => {
+        setResult('Error');
+        console.error({ error });
+      });
+  }, [fromText, fromLanguage, toLanguage]);
 
   return (
     <Container fluid>
